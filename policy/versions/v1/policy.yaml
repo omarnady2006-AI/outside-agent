@@ -1,0 +1,73 @@
+version: "v1"
+
+# Mapping of alternative field names to canonical policy fields
+field_name_aliases:
+  user_id: [uid, id, user_guid, user_key]
+  email: [email_address, mail]
+  phone: [phone_number, mobile, tel, cell]
+  name: [full_name, user_name, customer_name]
+  national_id: [ssn, tax_id, govt_id]
+  dob: [birth_date, date_of_birth]
+  address: [street_address, location, mailing_address, residence]
+  zip_code: [postal_code, zip]
+  timestamp: [created_at, ts]
+
+# Transformation rules for specific fields
+actions:
+  user_id:
+    action: TOKENIZE_DET
+    normalization: [trim]
+  email:
+    action: TOKENIZE_DET
+    normalization: [trim, lowercase]
+  phone:
+    action: TOKENIZE_DET
+    normalization: [trim, digits_only]
+  dob:
+    action: BUCKET
+    output_field: "age_bucket"
+    bucket_scheme: ["0-17", "18-25", "26-35", "36-45", "46-60", "60+"]
+  address:
+    action: GENERALIZE
+    output_field: "city_only"
+    generalize_scheme: "extract_city"
+  zip_code:
+    action: GENERALIZE
+    output_field: "zip_prefix_3"
+    generalize_scheme: "prefix_3"
+  name:
+    action: DROP
+  national_id:
+    action: DROP
+  city:
+    action: KEEP
+  country:
+    action: KEEP
+  gender:
+    action: KEEP
+  amount:
+    action: KEEP
+  timestamp:
+    action: KEEP
+    normalization: [date_iso]
+  label:
+    action: KEEP
+
+# Action to take when generalization fails (e.g., city cannot be extracted)
+generalization_fallbacks:
+  address: DROP
+
+# Default action for fields not explicitly listed
+default_action:
+  action: KEEP
+
+# Privacy audit applied AFTER all fixes and transformations
+postcheck:
+  apply_stage: post_fix
+  prohibited_patterns:
+    - pattern: '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+      description: "Email address pattern"
+    - pattern: '\b\d{10,15}\b'
+      description: "Phone-like digit length 10-15 after stripping non-digits"
+    - pattern: '\d{3}-\d{2}-\d{4}'
+      description: "Standard SSN pattern"

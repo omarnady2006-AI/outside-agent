@@ -1,0 +1,31 @@
+{
+  "copy_id": "copy_88234_20260125",
+  "decision": "ACCEPT",
+  "reason_codes": [],
+  "metrics": {
+    "missing_rates": {
+      "critical": 0.0,
+      "noncritical": 1.2
+    },
+    "duplicates_rate": 0.45,
+    "violations_counts": {
+      "range_violations": 0,
+      "enum_violations": 0
+    },
+    "postcheck_ok": true
+  },
+  "transform_summary": {
+    "tokenized_counts": {
+      "user_id": 1000,
+      "email": 1000,
+      "phone": 1000
+    },
+    "dropped_columns": [
+      "name",
+      "national_id"
+    ],
+    "removed_duplicates": 4,
+    "dropped_rows": 0
+  },
+  "timestamp": "2026-01-25T16:25:42Z"
+}

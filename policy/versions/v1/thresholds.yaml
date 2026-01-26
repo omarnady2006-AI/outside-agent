@@ -1,0 +1,57 @@
+version: "v1"
+# All rate limits are evaluated as percentages (0-100)
+rate_unit: "percent"
+
+# Fields essential for the dataset utility
+critical_fields:
+  - label
+
+# Maximum allowed percentage of missing values per field type
+missing_rate_limits:
+  critical_max: 0
+  noncritical_max: 5
+
+# Maximum allowed percentage of duplicate records in the copy
+duplicate_rate_max: 1
+
+# Thresholds for validation and schema violations
+violation_limits:
+  range_violations_max: 0
+  enum_violations_max: 0
+
+# Safety requirements for patterns detected after policy application
+postcheck_requirements:
+  sensitive_patterns_remaining_max: 0
+
+# Parameters for automated retry and regeneration logic
+retry_strategy:
+  max_regenerations_per_copy: 3
+  max_total_attempts_factor: 5
+# Version of the quality gate configuration
+version: "v1"
+
+# Fields essential for the dataset utility
+critical_fields:
+  - label
+
+# Maximum allowed percentage of missing values
+missing_rate_limits:
+  critical_max: 0
+  noncritical_max: 5
+
+# Maximum allowed percentage of duplicate records
+duplicate_rate_max: 1
+
+# Absolute limits on validation violations
+violation_limits:
+  range_violations_max: 0
+  enum_violations_max: 0
+
+# Requirements for the post-fix privacy audit
+postcheck_requirements:
+  sensitive_patterns_remaining_max: 0
+
+# Strategy for handling failed copies
+retry_strategy:
+  max_regenerations_per_copy: 3
+  max_total_attempts_factor: 5

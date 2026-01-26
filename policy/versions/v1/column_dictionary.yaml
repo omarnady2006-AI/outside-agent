@@ -1,0 +1,128 @@
+version: "v1"
+columns:
+  - name: user_id
+    expected_type: string
+    role: identifier
+    critical: false
+    nullable: false
+    notes: "Unique user identifier"
+    
+  - name: email
+    expected_type: string
+    role: pii
+    critical: false
+    nullable: true
+    notes: "User email address"
+    
+  - name: phone
+    expected_type: string
+    role: pii
+    critical: false
+    nullable: true
+    notes: "User phone number"
+    
+  - name: name
+    expected_type: string
+    role: pii
+    critical: false
+    nullable: true
+    notes: "User full name"
+    
+  - name: national_id
+    expected_type: string
+    role: pii
+    critical: false
+    nullable: true
+    notes: "Government issued ID"
+    
+  - name: dob
+    expected_type: date
+    role: quasi_identifier
+    critical: false
+    nullable: true
+    notes: "Date of birth"
+    
+  - name: address
+    expected_type: string
+    role: pii
+    critical: false
+    nullable: true
+    max_length: 500
+    notes: "Street address"
+    
+  - name: zip_code
+    expected_type: string
+    role: quasi_identifier
+    critical: false
+    nullable: true
+    notes: "Postal code"
+    
+  - name: city
+    expected_type: string
+    role: quasi_identifier
+    critical: false
+    nullable: true
+    max_length: 100
+    notes: "City name"
+    
+  - name: country
+    expected_type: string
+    role: quasi_identifier
+    critical: false
+    nullable: true
+    allowed_values: [US, UK, CA, AU, DE, FR, JP, CN, IN, BR, EG, SA]
+    notes: "Country code (ISO 3166-1 alpha-2)"
+    
+  - name: gender
+    expected_type: string
+    role: feature
+    critical: false
+    nullable: true
+    allowed_values: [male, female, other, prefer_not_to_say]
+    notes: "User gender"
+    
+  - name: amount
+    expected_type: float
+    role: feature
+    critical: false
+    nullable: false
+    range_min: 0
+    range_max: 1000000
+    notes: "Transaction amount (must be non-negative)"
+    
+  - name: timestamp
+    expected_type: datetime
+    role: metadata
+    critical: false
+    nullable: false
+    notes: "Record creation time"
+    
+  - name: label
+    expected_type: string
+    role: label
+    critical: true
+    nullable: false
+    notes: "Target variable for ML (cannot be null)"
+    
+  - name: age_bucket
+    expected_type: string
+    role: derived
+    critical: false
+    nullable: true
+    allowed_values: ["0-17", "18-25", "26-35", "36-45", "46-60", "60+", "Unknown"]
+    notes: "Age range bucket (derived from dob)"
+    
+  - name: city_only
+    expected_type: string
+    role: derived
+    critical: false
+    nullable: true
+    max_length: 100
+    notes: "Extracted city (derived from address)"
+    
+  - name: zip_prefix_3
+    expected_type: string
+    role: derived
+    critical: false
+    nullable: true
+    notes: "First 3 characters of zip code (derived)"

@@ -1,0 +1,34 @@
+version: "v1"
+reason_codes:
+  - code: SCHEMA_FAIL
+    severity: CRITICAL
+    default_action: REJECT
+    description: "The dataset structure does not conform to the defined schema requirements."
+  - code: SECRET_FOUND
+    severity: CRITICAL
+    default_action: QUARANTINE
+    description: "Detected credentials, API keys, or other sensitive secrets within the data."
+  - code: POSTCHECK_FAIL
+    severity: HIGH
+    default_action: QUARANTINE
+    description: "Sensitive PII patterns were detected in the dataset after applying privacy fixes."
+  - code: MISSING_TOO_HIGH
+    severity: HIGH
+    default_action: REJECT
+    description: "The rate of missing or null values exceeds the defined quality threshold."
+  - code: DUPLICATES_TOO_HIGH
+    severity: MEDIUM
+    default_action: REJECT
+    description: "The dataset contains an excessive number of duplicate records."
+  - code: OUT_OF_RANGE
+    severity: MEDIUM
+    default_action: REJECT
+    description: "Numerical values fall outside the permissible ranges defined in the policy."
+  - code: ENUM_VIOLATION
+    severity: MEDIUM
+    default_action: REJECT
+    description: "Categorical fields contain values that are not present in the approved enumeration list."
+  - code: LOGIC_CONSTRAINT_FAIL
+    severity: HIGH
+    default_action: REJECT
+    description: "Data values violate cross-field logical constraints or business rules."
