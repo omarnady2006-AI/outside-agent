@@ -12,20 +12,17 @@ The Hybrid Data Governance Agent evaluates synthetic datasets to ensure they are
 
 ```mermaid
 graph TD
-    Gen[Synthetic Data Generator] --> RE[Rule Engine<br/>(Deterministic Metrics)]
-    
-    subgraph "Secure Governance Enclave"
-        RE -->|Raw Data Access| Metrics[Governance Outputs<br/>(Scores & Risk Levels)]
-    end
-    
-    Metrics -->|Aggregated JSON| GA[Optional LLM Governance Agent<br/>(Explanation & Recommendations)]
-    Metrics -->|Log Event| AL[Audit Logger]
-    GA -->|Advisory Text| AL
-    
-    style GA stroke-dasharray: 5 5
-    
-    %% Constraints
-    note[<b>Constraints:</b><br/>• LLM is Optional<br/>• LLM has <b>NO</b> Raw Data Access<br/>• LLM executes <b>NO</b> Transformations]
+    Gen[Synthetic Data Generator]
+    RE[Rule Engine\nDeterministic Metrics]
+    GO[Governance Outputs\nScores and Risk Levels]
+    LLM[Optional LLM Governance Agent\nExplanation and Recommendations]
+    Audit[Audit Logger\nMetrics and Decisions]
+
+    Gen --> RE
+    RE --> GO
+    GO --> LLM
+    GO --> Audit
+    LLM --> Audit
 ```
 
 *(If diagram does not render, see text description below)*
