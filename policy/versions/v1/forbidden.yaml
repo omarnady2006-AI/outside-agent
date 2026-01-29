@@ -1,0 +1,25 @@
+version: "v1"
+forbidden_column_names:
+  - password
+  - pwd
+  - pass
+  - api_key
+  - secret_key
+  - access_token
+  - refresh_token
+  - private_key
+  - jwt
+
+forbidden_value_patterns:
+  - jwt_like
+  - private_key_block
+  - bearer_token
+
+default_action: QUARANTINE
+
+description: >
+  The presence of any forbidden column names or value patterns within a candidate dataset 
+  constitutes a severe security violation. Such findings trigger an immediate QUARANTINE 
+  action for the entire dataset copy to prevent the exposure of credentials or secrets. 
+  These violations are strictly categorized as non-fixable by automated processes and 
+  require manual security review and remediation at the source.

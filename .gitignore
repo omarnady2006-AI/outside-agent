@@ -1,0 +1,29 @@
+﻿# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# Outputs / artifacts
+outputs/
+tmp_*.csv
+final_postcheck.csv
+accept.csv
+reject_schema.csv
+quarantine_secrets.csv
+example_outputs/
+
+# Build
+dist/
+build/
+*.egg-info/
+
+# Editors / OS
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Temp smoke data
+tmp_smoke/
+
